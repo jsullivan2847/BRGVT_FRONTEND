@@ -1,4 +1,6 @@
 .product-list {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Distribute items evenly with space between */
+  padding: 50px 200px 50px 200px;
   }
