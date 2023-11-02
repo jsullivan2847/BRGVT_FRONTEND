@@ -1,14 +1,21 @@
 
 import './App.css';
 import ProductList from './components/ProductList/ProductList';
-import ApiFetch from './Services/GetProducts/ApiFetch';
+import useApiFetch from './Services/GetProducts/useApiFetch';
+import { useEffect, useState } from 'react';
 
 
 
 function App() {
 
-  const apiUrl = 'https://brgvt-v2.onrender.com/Products';
 
+  const apiUrl = 'https://brgvt-v2.onrender.com/Products';
+  const { data, isLoading, error, fetchData } = useApiFetch();
+  const [update,setUpdate] = useState(false);
+  useEffect(() => {
+    fetchData(apiUrl); // Specify your API endpoint
+  }, [update]);
+console.log(data);
 
   return (
     <div className="App">
@@ -37,17 +44,9 @@ function App() {
 
   <div className="main-content">
     <h2>Featured Products</h2>
-    <ApiFetch url={apiUrl}>
-{({ data, isLoading, error }) => (
-  <>
     {isLoading && <p>Loading...</p>}
+    {data && <ProductList products={data} setUpdate={setUpdate}/>}
     {error && <p>Error: {error.message}</p>}
-    {data && <ProductList products = {data} />}
-  </>
-)}
-</ApiFetch>
-      
-    
   </div>
 
   <footer className="footer">
