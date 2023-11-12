@@ -6,7 +6,7 @@
 }
 
 .main-image-container{
-    width: 300px;
+    width: 500px;
     flex: 0 0 auto; /* Prevent items from growing to fill available space */
     margin-right: 10px; /* Adjust the spacing between items */
 }

@@ -6,17 +6,21 @@ import "./ProductShowContainer.css"
 import { useState, useEffect } from 'react'
 import EditPhotosModal from '../EditPhotosModal/EditPhotosModal.jsx'
 export default function ProductShowContainer({data,handleButtonClick,isActive,setIsActive,setUpdate}) {
+    const [photoModalActive,setPhotoModalActive] = useState(false);
+    const handlePhotoButtonClick = () => {
+        setPhotoModalActive(prevState => !prevState)
+    }
   if(data){
     data = data[0]
       return (
         <div className='product-show-container'>
-            <div>
+            <div className='info-container'>
             <h1>Info Container</h1>
             <h3 className='product-title'>{data.name}</h3>
             <EditButton handleButtonClick={handleButtonClick} text={"Edit"}/>
             <br/>
             <br/>
-            <EditButton handleButtonClick={handleButtonClick}
+            <EditButton handleButtonClick={handlePhotoButtonClick}
             text={"Edit Photos"}
             />
             <EditProductModal active={isActive} 
@@ -25,15 +29,17 @@ export default function ProductShowContainer({data,handleButtonClick,isActive,se
                   setUpdate={setUpdate}
                   setActive={setIsActive}
                   />
-            <EditPhotosModal product={data}/>
+            <EditPhotosModal product={data}
+            isActive={photoModalActive}
+            handleButtonClick={handlePhotoButtonClick}/>
             </div>
            
         
-            <div>
+            <div className='page-image-container'>
             <ImageList images={data.images}/>
             </div>
         
-        <div>
+        <div className='selection-container'>
         <h1>Selection Container</h1>
         <h3>$500</h3>
         <EditButton handleButtonClick={handleButtonClick} text={"Add to Cart"}/>

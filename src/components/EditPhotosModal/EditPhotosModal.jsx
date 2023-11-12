@@ -7,7 +7,7 @@ import useApiPut from '../../Services/GetProducts/useApiPut';
 import { useState, useEffect } from 'react';
 import { json } from 'react-router-dom';
 
-export default function EditPhotosModal({product}) {
+export default function EditPhotosModal({product, isActive, handleButtonClick}) {
   const url = 'https://brgvt-v2.onrender.com/Photos/Upload'
   const { sentPostData, loading, error,PostData } = usePostPhoto();
   const { sentPutData, putData } = useApiPut();
@@ -40,19 +40,22 @@ export default function EditPhotosModal({product}) {
           }
       };
   return (
-    <div>
-      <div id="myModal" className="modal">
-        <div className="modal-content">
-            <EditPhotosList images={images}/>
-            {/* <EditButton handleButtonClick={handleButtonClick} text={"Close"}></EditButton> */}
-            <h2>Edit Photos</h2>
-            <form id="myForm" action="submit.php" method="post"/>
-                <label htmlFor="name">Name:</label>
-                {/* <input type="text" id="name" name="name" onChange={handleChange} required/><br/><br/> */}
-                <label htmlFor="fileInput">Select a File:</label>
-                <input type="file" id="fileInput" name="fileInput" onChange={handleFileChange}/>
-                <EditButton text={"Submit"} handleButtonClick={handleSubmit}/> 
-            </div> </div>
-    </div>
+    <>
+    {isActive && <div>
+        <div id="myModal" className="modal">
+          <div className="modal-content">
+              <EditPhotosList images={images}/>
+              {/* <EditButton handleButtonClick={handleButtonClick} text={"Close"}></EditButton> */}
+              <h2>Edit Photos</h2>
+              <form id="myForm" action="submit.php" method="post"/>
+                  <label htmlFor="name">Name:</label>
+                  {/* <input type="text" id="name" name="name" onChange={handleChange} required/><br/><br/> */}
+                  <label htmlFor="fileInput">Select a File:</label>
+                  <input type="file" id="fileInput" name="fileInput" onChange={handleFileChange}/>
+                  <EditButton text={"Submit"} handleButtonClick={handleSubmit}/>
+                  <EditButton handleButtonClick={handleButtonClick} text={"Close"}></EditButton>
+              </div> </div>
+      </div> }
+    </>
   )
 }
