@@ -25,7 +25,7 @@ export default function ProductShowContainer({data,handleButtonClick,isActive,se
                   setUpdate={setUpdate}
                   setActive={setIsActive}
                   />
-            <EditPhotosModal images={data.images}/>
+            <EditPhotosModal product={data}/>
             </div>
            
         

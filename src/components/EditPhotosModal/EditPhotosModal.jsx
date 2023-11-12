@@ -3,36 +3,42 @@ import "./EditPhotosModal.css"
 import EditPhotosList from '../EditPhotosList/EditPhotosList';
 import EditButton from '../Edit Button/EditButton';
 import usePostPhoto from '../../Services/usePostPhoto';
-import { useState } from 'react';
+import useApiPut from '../../Services/GetProducts/useApiPut';
+import { useState, useEffect } from 'react';
 import { json } from 'react-router-dom';
 
-export default function EditPhotosModal({images}) {
+export default function EditPhotosModal({product}) {
   const url = 'https://brgvt-v2.onrender.com/Photos/Upload'
   const { sentPostData, loading, error,PostData } = usePostPhoto();
+  const { sentPutData, putData } = useApiPut();
   const [selectedFile, setSelectedFile] = useState(null);
+  const images = product.images
+  console.log(images);
+
+    useEffect(() => {
+    if(sentPostData){
+        let file_name = sentPostData.split("/")
+        file_name = file_name[file_name.length - 1]
+        const productUrl = 'https://brgvt-v2.onrender.com/Products/'+product.id
+        const payload = {"images":images}
+        payload.images.push({"name":file_name,"url":sentPostData,"display_order":images.length})
+        putData(productUrl,"PUT",payload);
+        console.log(sentPutData);
+    }
+},[sentPostData])
+
   const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
       };  
 
-  const handleSubmit = async (event) => {
-    if(selectedFile){
-        const formData = new FormData();
-        formData.append("file",selectedFile,selectedFile.name);
-        for (const pair of formData.entries()) {
-            console.log(pair);
+      const handleSubmit = async (event) => {
+        if (selectedFile) {
+          const formData = new FormData();
+          formData.append("file", selectedFile, selectedFile.name);
+          await PostData(url, "POST", formData,product);
+          console.log(sentPostData)
           }
-        try{
-            await PostData(url, "POST", formData);
-        }
-        catch(e){
-            console.log(json.toString(error))   
-        }
-        finally{
-            
-            console.log(sentPostData)
-        }
-    }
-  }
+      };
   return (
     <div>
       <div id="myModal" className="modal">
