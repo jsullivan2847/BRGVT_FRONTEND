@@ -25,7 +25,8 @@ const EditProductModal = ({active, setActive,handleButtonClick, product, setUpda
   };
   const handleSubmit = async () => {
     try {
-      await putData(apiUrl,"PUT",formData)
+      await putData(apiUrl,"PUT",formData);
+      console.log(putData(apiUrl,"PUT",formData));
     }
     finally{
       setUpdate(prevState => !prevState);

@@ -1,0 +1,27 @@
+/* Header styles */
+.header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+  }
+  
+  .header h1 {
+    display: inline-block;
+    font-size: 24px;
+  }
+
+  .header-nav{
+    display: inline;
+  }
+  .header-nav li{
+    display:inline-block;
+    padding:0 10px 0 10px;
+  }
+  .nav-link{
+    text-decoration: none;
+    color:white;
+  }

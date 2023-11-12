@@ -1,5 +1,6 @@
 .App {
     text-align: center;
+    height: 100vh;
   }
   
   /* Reset some default styles */
@@ -13,18 +14,6 @@
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     color: #333;
-  }
-  
-  /* Header styles */
-  .header {
-    background-color: #007bff;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .header h1 {
-    font-size: 24px;
   }
   
   /* Navigation menu styles */
@@ -93,14 +82,6 @@
   
   .product-card button:hover {
     background-color: #0056b3;
-  }
-  
-  /* Footer styles */
-  .footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
   }
   
   /* Responsive styles for smaller screens */
