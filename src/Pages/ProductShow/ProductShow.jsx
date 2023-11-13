@@ -24,7 +24,6 @@ export default function ProductShow() {
   }
   return (
     <div className='product-show-page'>
-      <Header/>
       <ProductShowContainer
       data={data}
       handleButtonClick={handleButtonClick}
@@ -32,7 +31,6 @@ export default function ProductShow() {
       setIsActive={setIsActive}
       setUpdate={setUpdate}
       />
-    <Footer/>
     </div>
   )
 }

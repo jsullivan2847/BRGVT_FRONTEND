@@ -15,7 +15,6 @@ export default function ProductShowContainer({data,handleButtonClick,isActive,se
       return (
         <div className='product-show-container'>
             <div className='info-container'>
-            <h1>Info Container</h1>
             <h3 className='product-title'>{data.name}</h3>
             <EditButton handleButtonClick={handleButtonClick} text={"Edit"}/>
             <br/>
@@ -40,7 +39,6 @@ export default function ProductShowContainer({data,handleButtonClick,isActive,se
             </div>
         
         <div className='selection-container'>
-        <h1>Selection Container</h1>
         <h3>$500</h3>
         <EditButton handleButtonClick={handleButtonClick} text={"Add to Cart"}/>
         </div>

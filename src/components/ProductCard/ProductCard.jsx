@@ -3,6 +3,7 @@ import './ProductCard.css'
 import EditButton from '../Edit Button/EditButton'
 import EditProductModal from '../EditProductModal/EditProductModal'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function ProductCard({product,setUpdate}) {
   let url = ''
@@ -30,7 +31,7 @@ function ProductCard({product,setUpdate}) {
               setUpdate={setUpdate}
               setActive={setIsActive}
               />
-        <a href={link}><img className="product-image" src={url}/></a>
+        <Link to={link}><img className="product-image" src={url}/></Link>
         <button className='add-to-cart-button'>Add to Cart</button>
     </div>
   )

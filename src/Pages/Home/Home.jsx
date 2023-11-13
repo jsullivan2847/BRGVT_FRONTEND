@@ -21,14 +21,12 @@ export default function Home() {
   }
   return (
       <div className="App">
-      <Header/>
   <div className="main-content">
     <h2>Featured Products</h2>
     {loading && <h1>Loading...</h1>}
     {data && <ProductList products={data} setUpdate={setUpdate}/>}
     {error && <p>Error: {error.message}</p>}
   </div>
-  <Footer/>
     </div>
   )
 }
