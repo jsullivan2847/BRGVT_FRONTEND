@@ -1,0 +1,20 @@
+.main-image-list{
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto; /* Enable horizontal scrolling if necessary */
+    scrollbar-width: thin;
+}
+
+.main-image-container{
+    width: 500px;
+    flex: 0 0 auto; /* Prevent items from growing to fill available space */
+    margin-right: 10px; /* Adjust the spacing between items */
+}
+
+.main-image{
+  width: 100%; /* Make the images fill their container */
+  border: 1px solid #ddd; /* Optional: Add a border for better separation */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+  transition: transform 0.2s ease-in-out; /* Optional: Add a smooth transition effect */
+}
+

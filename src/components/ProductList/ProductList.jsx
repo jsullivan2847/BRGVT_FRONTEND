@@ -1,15 +1,13 @@
 import React from 'react'
 import ProductCard from '../ProductCard/ProductCard'
 import './ProductList.css' 
-import ApiFetch from '../../Services/GetProducts/ApiFetch'
 
-function ProductList({products}) {
-  products ? console.log(products) : console.log('no products');
+function ProductList({products,setUpdate}) {
   return (
     <div className='product-list'>
-      {products.map((product,index) => (
-          <ProductCard product={product} key={index}/>
-        ))}
+      {Array.isArray(products) ? products.map((product,index) => (
+        <ProductCard product={product} key={index} setUpdate={setUpdate}/>
+        )) : <ProductCard product={products}  setUpdate={setUpdate}/>}
     </div>
   )
 }

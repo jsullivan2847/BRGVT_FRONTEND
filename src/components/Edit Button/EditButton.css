@@ -1,0 +1,13 @@
+.custom-button {
+    background-color: #1da1f2; /* Twitter blue color */
+    color: #fff; /* Text color */
+    border: none;
+    border-radius: 25px; /* Rounded corners */
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .custom-button:hover {
+    background-color: #0d8eff; /* Darker blue on hover */
+  }
