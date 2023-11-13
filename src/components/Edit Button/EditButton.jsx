@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./EditButton.css"
 
 function EditButton({handleButtonClick,text}) {
-
-
+  
   const active = false;
 
   return (
