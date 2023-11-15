@@ -17,6 +17,7 @@ const Image = ({ image, index, moveImage }) => {
         if (draggedItem.index !== index) {
           moveImage(draggedItem.index, index);
           draggedItem.index = index;
+          console.log(draggedItem);
         }
       },
     });

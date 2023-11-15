@@ -20,8 +20,17 @@ export default function EditPhotosModal({product, isActive, handleButtonClick}) 
         let file_name = sentPostData.split("/")
         file_name = file_name[file_name.length - 1]
         const productUrl = 'https://brgvt-v2.onrender.com/Products/'+product.id
-        const payload = {"images":images}
-        payload.images.push({"name":file_name,"url":sentPostData,"display_order":images.length})
+        let payload = {}
+        let display_order = null
+        if(images){
+          payload = {"images":images}
+          display_order = images.length - 1;
+        }
+        else {
+          payload = {"images":[]} 
+          display_order = 0;
+        }
+        payload.images.push({"name":file_name,"url":sentPostData,"display_order":display_order})
         putData(productUrl,"PUT",payload);
         console.log(sentPutData);
     }
@@ -44,7 +53,8 @@ export default function EditPhotosModal({product, isActive, handleButtonClick}) 
     {isActive && <div>
         <div id="myModal" className="modal">
           <div className="modal-content">
-              <EditPhotosList images={images}/>
+            {images && <EditPhotosList images={images}/>}
+              
               {/* <EditButton handleButtonClick={handleButtonClick} text={"Close"}></EditButton> */}
               <h2>Edit Photos</h2>
               <form id="myForm" action="submit.php" method="post"/>
