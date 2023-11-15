@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./EditPhotosList.css"
 import { useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -17,7 +17,7 @@ const Image = ({ image, index, moveImage }) => {
         if (draggedItem.index !== index) {
           moveImage(draggedItem.index, index);
           draggedItem.index = index;
-          console.log(draggedItem);
+          //console.log("from line 20 ",draggedItem);
         }
       },
     });
@@ -30,14 +30,26 @@ const Image = ({ image, index, moveImage }) => {
     );
   };
   
-  const EditPhotosList = ({ images }) => {
+  const EditPhotosList = ({images,setDisplayOrder}) => {
     const [imageList, setImageList] = useState(images);
-  
+
+    useEffect(()=>{
+      setDisplayOrder(imageList);
+    },[imageList])
     const moveImage = (fromIndex, toIndex) => {
       const updatedImages = [...imageList];
       const [movedImage] = updatedImages.splice(fromIndex, 1);
       updatedImages.splice(toIndex, 0, movedImage);
       setImageList(updatedImages);
+      //console.log(imageList);
+      imageList.forEach((image) => {
+        var new_index = imageList.indexOf(image)
+        //console.log("index: ",new_index);
+        image.display_order = new_index;
+        //console.log("display order: ",image.display_order);
+      })
+      //console.log("imageList: ",imageList);
+      //setDisplayOrder(imageList);
     };
   
     return (

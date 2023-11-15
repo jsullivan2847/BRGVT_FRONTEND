@@ -16,6 +16,7 @@ export default function ProductShow() {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
+    console.log("hmmm");
     fetchData(apiUrl); // Specify your API endpoint
   }, [update]);
 
