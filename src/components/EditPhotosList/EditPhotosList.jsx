@@ -5,7 +5,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 import { useState } from 'react';
 
-const Image = ({ image, index, moveImage }) => {
+const Image = ({ image, fullList, index, moveImage, setImageList }) => {
     const [, ref] = useDrag({
       type: 'IMAGE',
       item: { index },
@@ -21,10 +21,20 @@ const Image = ({ image, index, moveImage }) => {
         }
       },
     });
+
+    const handleDelete = () => {
+      console.log("hmm")
+      const filteredList = fullList.filter(elem => elem !== image);
+      setImageList(filteredList);
+    }
   
     return (
       <div ref={(node) => ref(drop(node))} className='image-container'>
         <img className='image' src={image.url} alt={`Image ${index + 1}`} />
+        <div class="delete-overlay" onClick={handleDelete}>
+        <div class="delete-icon">&#128465;</div>
+        <div class="delete-text">Delete</div>
+    </div>
         <div className='overlay'></div>
       </div>
     );
@@ -36,27 +46,29 @@ const Image = ({ image, index, moveImage }) => {
     useEffect(()=>{
       setDisplayOrder(imageList);
     },[imageList])
+
+
     const moveImage = (fromIndex, toIndex) => {
       const updatedImages = [...imageList];
       const [movedImage] = updatedImages.splice(fromIndex, 1);
       updatedImages.splice(toIndex, 0, movedImage);
       setImageList(updatedImages);
-      //console.log(imageList);
       imageList.forEach((image) => {
-        var new_index = imageList.indexOf(image)
-        //console.log("index: ",new_index);
+        var new_index = imageList.indexOf(image);
         image.display_order = new_index;
-        //console.log("display order: ",image.display_order);
       })
-      //console.log("imageList: ",imageList);
-      //setDisplayOrder(imageList);
     };
   
     return (
       <DndProvider backend={HTML5Backend}>
         <div className='list'>
           {imageList.map((image, index) => (
-            <Image key={index} index={index} image={image} moveImage={moveImage} />
+            <Image key={index}
+            index={index}
+            image={image}
+            fullList={imageList}
+            moveImage={moveImage}
+            setImageList={setImageList}/>
           ))}
         </div>
       </DndProvider>
