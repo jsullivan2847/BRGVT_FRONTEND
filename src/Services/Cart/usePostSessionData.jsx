@@ -5,29 +5,28 @@ function useAddToCart() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const addToCart = async (product_id, quantity) => {
-    const key = 'abc'
+  const addToCart = async (product) => {
     setLoading(true);
     setError(null);
+    console.log(product);
     try {
-      const response = await fetch("http://127.0.0.1:5000/add-to-cart", {
+      const response = await fetch("https://brgvt-v2.onrender.com/add-to-cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // Authorization: "Bearer " + key,
-          credentials: 'include'
         },
-        body: JSON.stringify({ product_id, quantity }),
+        credentials: 'include',
+        body: JSON.stringify({product}),
       });
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
+  
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {
         const result = await response.json();
-        console.log(result);
+        // console.log("JSON response:", result);
         setCartData(result);
       } else {
         const result = await response.text();
@@ -35,10 +34,10 @@ function useAddToCart() {
         setCartData(result);
       }
     } catch (error) {
+      console.error("Error:", error);
       setError(error);
-    } finally {
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   return { cartData, loading, error, addToCart };
