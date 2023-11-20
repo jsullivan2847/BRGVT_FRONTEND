@@ -16,8 +16,8 @@ export default function ProductShow() {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    console.log("hmmm");
-    fetchData(apiUrl); // Specify your API endpoint
+    fetchData(apiUrl);
+    console.log('triggered');
   }, [update]);
 
   const handleButtonClick = () => {
@@ -25,13 +25,13 @@ export default function ProductShow() {
   }
   return (
     <div className='product-show-page'>
-      <ProductShowContainer
+      {data && <ProductShowContainer
       data={data}
       handleButtonClick={handleButtonClick}
       isActive={isActive}
       setIsActive={setIsActive}
       setUpdate={setUpdate}
-      />
+      />}
     </div>
   )
 }

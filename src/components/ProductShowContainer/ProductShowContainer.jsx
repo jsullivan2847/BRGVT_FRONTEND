@@ -5,11 +5,20 @@ import ImageList from '../ImageList/ImageList.jsx'
 import "./ProductShowContainer.css"
 import { useState, useEffect } from 'react'
 import EditPhotosModal from '../EditPhotosModal/EditPhotosModal.jsx'
+import SelectionContainer from '../SelectionContainer/SelectionContainer.jsx'
+import useAddToCart from '../../Services/Cart/usePostSessionData.jsx'
+import useGetCart from '../../Services/Cart/useGetSessionData.jsx'
 export default function ProductShowContainer({data,handleButtonClick,isActive,setIsActive,setUpdate}) {
+
+    const { cartData, addToCart } = useAddToCart();
+    const { cartResponse, loading, error, getCart } = useGetCart();
     const [photoModalActive,setPhotoModalActive] = useState(false);
     const handlePhotoButtonClick = () => {
         setPhotoModalActive(prevState => !prevState)
     }
+  useEffect(() => {
+    console.log(cartData);
+  },[cartData])
   if(data){
     data = data[0]
       return (
@@ -38,11 +47,10 @@ export default function ProductShowContainer({data,handleButtonClick,isActive,se
             <div className='page-image-container'>
             <ImageList images={data.images}/>
             </div>
-        
-        <div className='selection-container'>
-        <h3>$500</h3>
-        <EditButton handleButtonClick={handleButtonClick} text={"Add to Cart"}/>
-        </div>
+            <SelectionContainer
+            product={data}
+            addToCart={addToCart}
+            />
         </div>
       )
   }

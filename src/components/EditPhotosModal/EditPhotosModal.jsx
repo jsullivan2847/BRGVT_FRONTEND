@@ -4,20 +4,24 @@ import EditPhotosList from '../EditPhotosList/EditPhotosList';
 import EditButton from '../Edit Button/EditButton';
 import usePostPhoto from '../../Services/usePostPhoto';
 import useApiPut from '../../Services/GetProducts/useApiPut';
-import useApiFetch from '../../Services/GetProducts/useApiFetch';
+import useDeletePhoto from '../../Services/useDeletePhoto';
 import { useState, useEffect } from 'react';
-import { json } from 'react-router-dom';
 
 export default function EditPhotosModal({product, isActive, handleButtonClick,setUpdate}) {
   const url = 'https://brgvt-v2.onrender.com/Photos/Upload'
-  const { sentPostData, loading, error,PostData } = usePostPhoto();
+  const {setData, sentPostData, loading, error,PostData } = usePostPhoto();
+  const { deleteResponse, deletePhoto } = useDeletePhoto();
   const { sentPutData, putData } = useApiPut();
-  const {fetchData} = useApiFetch();
   const [selectedFile, setSelectedFile] = useState(null);
   const [displayOrder,setDisplayOrder] = useState(null);
   const [photoUploading,setPhotoUploading] = useState(null);
+  const [fileToDelete,setFileToDelete] = useState(null);
   const images = product.images
-  //console.log(images);
+
+  const uploadNewPhoto = async (productUrl,payload)  => {
+    await putData(productUrl,"PUT",payload);
+    setUpdate(prevState => !prevState);
+  }
 
     useEffect(() => {
     if(sentPostData){
@@ -35,32 +39,30 @@ export default function EditPhotosModal({product, isActive, handleButtonClick,se
           display_order = 0;
         }
         payload.images.push({"name":file_name,"url":sentPostData,"display_order":display_order})
-        putData(productUrl,"PUT",payload);
-        console.log(sentPutData);
+        uploadNewPhoto(productUrl,payload);
+        setData(false);
     }
 },[sentPostData])
-
-
-useEffect(() => {
-  //console.log(displayOrder);
-},[displayOrder]);
 
   const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
       };  
 
       const handleSubmit = async () => {
+        if(fileToDelete){
+          deletePhoto(fileToDelete);
+          setFileToDelete(null)
+          }
         if (selectedFile) {
           const formData = new FormData();
           formData.append("file", selectedFile, selectedFile.name);
           setPhotoUploading(true);
-          await PostData(url, "POST", formData,product);
-          console.log(sentPostData)
-          setSelectedFile(null);
+          PostData(url, "POST", formData,product);
           handleButtonClick()
+          setSelectedFile(null);
+          setPhotoUploading(null);
           }
-          if(displayOrder){
-            console.log(displayOrder);
+        else if(displayOrder){
             let productUrl = 'https://brgvt-v2.onrender.com/Products/'+product.id
             try{
               await putData(productUrl,"PUT",{"images":displayOrder});
@@ -69,8 +71,8 @@ useEffect(() => {
               console.log(e);
             }
             finally{
+              setDisplayOrder(null);
               setUpdate(prevState => !prevState);
-              //fetchData(productUrl);
             }
             handleButtonClick();
           }
@@ -80,7 +82,7 @@ useEffect(() => {
     {isActive && <div>
         <div id="myModal" className="modal">
           <div className="modal-content">
-            {images && <EditPhotosList images={images} setDisplayOrder={setDisplayOrder}/>}
+            {images && <EditPhotosList setFile={setFileToDelete} images={images} setDisplayOrder={setDisplayOrder}/>}
               <h2>Edit Photos</h2>
               {photoUploading && <h1>Loading...</h1>}
               <form id="myForm" action="submit.php" method="post"/>

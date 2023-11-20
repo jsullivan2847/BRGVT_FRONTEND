@@ -9,7 +9,6 @@ function useApiPut() {
   const putData = async (url, method = "PUT", body = null) => {
     setLoading(true);
     setError(null);
-    console.log(body);
     try {
       const response = await fetch(url, {
         method: method,
@@ -26,7 +25,6 @@ function useApiPut() {
 
       const result = await response.json();
       setData(result);
-     
     } catch (error) {
       console.log(error);
       setError(error);
