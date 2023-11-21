@@ -14,6 +14,9 @@ export default function Header() {
             <li>
             <a className="nav-link" href="/"><h2>Archive</h2></a>
             </li>
+            <li>
+            <a className="nav-link" href="/#/Cart"><h2>Cart</h2></a>
+            </li>
         </ul>
   </header>
   )

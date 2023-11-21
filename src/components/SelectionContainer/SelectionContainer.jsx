@@ -6,7 +6,7 @@ export default function SelectionContainer({product,addToCart,}) {
     }
   return (
     <div className='selection-container'>
-    <h3>$500</h3>
+    <h3>${product.price}</h3>
     <EditButton handleButtonClick={handleButtonClick} text={"Add to Cart"} product={product}/>
     </div>
   )

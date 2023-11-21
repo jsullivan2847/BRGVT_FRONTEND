@@ -13,8 +13,8 @@ function useGetCart() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer your-secret-key", // Replace with your actual secret key
-        }
+        },
+        credentials: 'include'
       });
 
       if (!response.ok) {
