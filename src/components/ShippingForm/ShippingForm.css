@@ -1,15 +1,16 @@
 /* ShippingForm.css */
 .shipping-form-container {
-    max-width: 600px;
-    margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
   }
   
   .form-group {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
   }
   
@@ -19,12 +20,11 @@
   }
   
   input {
-    width: 100%;
     padding: 10px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-top: 5px;
+    margin: 5px 5px 0 5px;
   }
   
   .submit-button {
@@ -39,4 +39,10 @@
   .submit-button:hover {
     background-color: #45a049;
   }
-  
+
+  /* #aptSuiteOther{
+    width: 50px;
+  }
+  #streetAddress{
+    width: 400px;
+  } */

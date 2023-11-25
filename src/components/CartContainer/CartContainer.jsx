@@ -38,7 +38,7 @@ export default function CartContainer() {
     </div>
     {cartResponse &&     <div className="cart-total">
       <p>Total: $ {calculateTotal(cartResponse.cart)}</p>
-      <button className="checkout-button"><a href='/#/Checkout'>Proceed To Checkout</a></button>
+      {/* <button className="checkout-button"><a href='/#/Checkout'>Proceed To Checkout</a></button> */}
     </div>}
   </div>
 );

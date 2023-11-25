@@ -1,6 +1,6 @@
 /* Checkout.css */
 .checkout-container {
-    width: 90vw;
+    width: 60vw;
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -47,4 +47,24 @@
   .submit-button:hover {
     background-color: #45a049;
   }
-  
+  .thumbnail{
+    width: 100px;
+  }
+  li {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  .form-container{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .right-side{
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+  }

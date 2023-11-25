@@ -29,8 +29,8 @@ const ShippingForm = ({setShipping}) => {
       <h2>Your Shipping Address</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="fullName">Full Name:</label>
           <input
+          placeholder='Full Name'
             type="text"
             id="fullName"
             name="fullName"
@@ -40,8 +40,8 @@ const ShippingForm = ({setShipping}) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="streetAddress">Street Address:</label>
           <input
+          placeholder='Street Address'
             type="text"
             id="streetAddress"
             name="streetAddress"
@@ -49,10 +49,8 @@ const ShippingForm = ({setShipping}) => {
             onChange={handleChange}
             required
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="aptSuiteOther">Apt / Suite / Other:</label>
           <input
+          placeholder='Apt #'
             type="text"
             id="aptSuiteOther"
             name="aptSuiteOther"
@@ -61,8 +59,8 @@ const ShippingForm = ({setShipping}) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="city">City:</label>
           <input
+          placeholder='City'
             type="text"
             id="city"
             name="city"
@@ -70,10 +68,8 @@ const ShippingForm = ({setShipping}) => {
             onChange={handleChange}
             required
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="state">State:</label>
-          <input
+        <input
+          placeholder='State'
             type="text"
             id="state"
             name="state"
@@ -81,10 +77,8 @@ const ShippingForm = ({setShipping}) => {
             onChange={handleChange}
             required
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="zipCode">ZIP Code:</label>
-          <input
+        <input
+          placeholder='ZIP Code'
             type="text"
             id="zipCode"
             name="zipCode"
@@ -94,8 +88,8 @@ const ShippingForm = ({setShipping}) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="phoneNumber">Phone Number:</label>
           <input
+          placeholder='Phone #'
             type="tel"
             id="phoneNumber"
             name="phoneNumber"

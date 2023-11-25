@@ -25,8 +25,8 @@ const PaymentForm = ({setPayment}) => {
       <h2>Payment Information</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="cardNumber">Card Number:</label>
           <input
+            placeholder='Card Number'
             type="text"
             id="cardNumber"
             name="cardNumber"
@@ -36,8 +36,8 @@ const PaymentForm = ({setPayment}) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="cardHolderName">Cardholder Name:</label>
           <input
+            placeholder='Card Holder Name'
             type="text"
             id="cardHolderName"
             name="cardHolderName"
@@ -47,20 +47,19 @@ const PaymentForm = ({setPayment}) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="expirationDate">Expiration Date:</label>
           <input
+            placeholder='Exp. MM/YY'
             type="text"
             id="expirationDate"
             name="expirationDate"
             value={formData.expirationDate}
             onChange={handleChange}
-            placeholder="MM/YY"
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="cvv">CVV:</label>
           <input
+            placeholder='CVV'
             type="text"
             id="cvv"
             name="cvv"
