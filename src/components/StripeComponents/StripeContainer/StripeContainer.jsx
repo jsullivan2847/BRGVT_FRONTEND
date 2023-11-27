@@ -5,7 +5,7 @@ import StripePayment from '../StripePayment/StripePayment';
 import StripeCheckout from '../StripeCheckout/StripeCheckout';
 
 
-export default function StripeContainer() {
+export default function StripeContainer({total}) {
 
     // Set up your Publishable Key
 const stripe_key = toString(process.env.STRIPE_SECRET_KEY);
@@ -19,7 +19,7 @@ if(stripePromise){
     <Elements stripe={stripePromise}>
         <h1>Stripe Container</h1>
         {/* <StripePayment/> */}
-        <StripeCheckout/>
+        <StripeCheckout total={total}/>
     </Elements>
   )
 }

@@ -11,6 +11,7 @@ const Checkout = () => {
     console.log('render')
     const [shipping,setShipping] = useState(null);
     const [payment,setPayment] = useState(null);
+    const [total,setTotal] = useState(0);
 
   return (
     <div className='checkout-page'>
@@ -21,8 +22,8 @@ const Checkout = () => {
         {/* {payment ? <PaymentDisplay data={payment}/> : <PaymentForm setPayment={setPayment}/>} */}
         </div>
         <div className='right-side'>
-        <CartContainer/>
-        <StripeContainer/>
+        <CartContainer setTotal={setTotal}/>
+        <StripeContainer total={total}/>
         </div>
         
         

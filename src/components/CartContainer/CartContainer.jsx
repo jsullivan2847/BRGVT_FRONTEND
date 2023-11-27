@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import useGetCart from '../../Services/Cart/useGetSessionData'
 import "./CartContainer.css"
-export default function CartContainer() {
+export default function CartContainer({setTotal}) {
     const { cartResponse, loading, error, getCart } = useGetCart();
     console.log(cartResponse)
     useEffect(() => {
@@ -11,6 +11,12 @@ export default function CartContainer() {
     if(error){
         console.log(error)
     }
+
+    const calculateTotal = (cartItems) => {
+        let total = cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
+        setTotal(total);
+    return total
+    };
     
   return (
     <div className="cart-container">
@@ -25,7 +31,7 @@ export default function CartContainer() {
           {cartResponse.cart.map((item, index) => (
             <li key={index}>
                 {console.log(item)}
-              <img src={item.product.images[0].url} alt={item.name} />
+                {item.product.images && <img src={item.product.images[0].url} alt={item.name} /> }
               <div>
                 <p className="item-name">{item.product.name}</p>
                 <p className="item-price">${item.product.price}</p>
@@ -44,6 +50,3 @@ export default function CartContainer() {
 );
 };
 
-const calculateTotal = (cartItems) => {
-return cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
-};
