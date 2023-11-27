@@ -4,7 +4,6 @@ import EditButton from '../Edit Button/EditButton';
 import useApiPut from '../../Services/GetProducts/useApiPut';
 import useApiFetch from '../../Services/GetProducts/useApiFetch';
 const EditProductModal = ({active, setActive,handleButtonClick, product, setUpdate}) => {
-  //console.log(product);
   const { sentPutData, isLoading, error, putData } = useApiPut();
   const { data, fetchData } = useApiFetch();
   const apiUrl = 'https://brgvt-v2.onrender.com/Products/'+product.id;
@@ -21,12 +20,10 @@ const EditProductModal = ({active, setActive,handleButtonClick, product, setUpda
       ...formData,
       [name]: value,
     });
-    console.log(formData);
   };
   const handleSubmit = async () => {
     try {
       await putData(apiUrl,"PUT",formData);
-      console.log(putData(apiUrl,"PUT",formData));
     }
     finally{
       setUpdate(prevState => !prevState);
@@ -40,10 +37,14 @@ const EditProductModal = ({active, setActive,handleButtonClick, product, setUpda
             <EditButton handleButtonClick={handleButtonClick} text={"Close"}></EditButton>
             <h2>Edit Product</h2>
             <form id="myForm" action="submit.php" method="post"/>
-                <label htmlFor="name">Name:</label>
-                <input type="text" id="name" name="name" onChange={handleChange} required/><br/><br/>
-                <label htmlFor="fileInput">Select a File:</label>
-                <input type="file" id="fileInput" name="fileInput"/>
+                <label htmlFor="name" className='label'>Name:</label>
+                <input placeholder={product.name} type="text" id="name" name="name" onChange={handleChange} required/>
+                <label htmlFor="price" className='label'>Price:</label>
+                <input placeholder={product.price} type="text" id="price" name="price" onChange={handleChange} required/>
+                <label htmlFor="sizes" className='label'>Sizes:</label>
+                <input placeholder={product.sizes} type="text" id="sizes" name="sizes" onChange={handleChange} required/>
+                <label htmlFor="quantity" className='label'>Quantity:</label>
+                <input placeholder={product.quantity} type="text" id="quantity" name="quantity" onChange={handleChange} required/>
                 <EditButton text={"Submit"} handleButtonClick={handleSubmit}/> 
             </div> </div>} </>
   );

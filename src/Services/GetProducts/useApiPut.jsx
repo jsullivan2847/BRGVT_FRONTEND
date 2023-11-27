@@ -6,7 +6,7 @@ function useApiPut() {
   const [error, setError] = useState(null);
 
   
-  const putData = async (url, method = "PUT", body = null) => {
+  const putData = async (url, method = "POST", body = null) => {
     setLoading(true);
     setError(null);
     try {
