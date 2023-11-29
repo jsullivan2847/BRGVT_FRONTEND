@@ -1,7 +1,34 @@
 import React from 'react'
 import { useStripe } from '@stripe/react-stripe-js';
 
-export default function StripeCheckout({total}) {
+export default function StripeCheckout({products,total}) {
+    console.log(products.length)
+    console.log("here: ",products);
+    let prepareCheckout = null
+    if(products.length > 1){
+        prepareCheckout = products.map((product) => {
+            return {
+                "price_data":{
+                    "product":product.product.stripe_product,
+                    "currency":"usd",
+                    "unit_amount":product.product.price * 100
+                },
+                "quantity":product.product.quantity,
+            }
+        })
+    }
+    else if(products.length == 1){
+        prepareCheckout = {
+            "price_data":{
+                "product":products[0].product.stripe_product,
+                "currency":"usd",
+                "unit_amount":products[0].product.price * 100
+            },
+            "quantity":products[0].quantity,
+        }
+    }
+    
+    console.log({"items":prepareCheckout})
     total = total * 100;
     const stripe = useStripe();
     const handleSubmit = async (e) => {
@@ -11,16 +38,7 @@ export default function StripeCheckout({total}) {
             headers:{
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                "items": {
-                    "price_data":{
-                        "product":"prod_P4bGuzdo5Mo1Ze",
-                        "currency":"usd",
-                        "unit_amount":total
-                    },
-                    "quantity":1,
-                }
-            }),
+            body: JSON.stringify({"items":prepareCheckout})
         })
 
     const session = await response.json();

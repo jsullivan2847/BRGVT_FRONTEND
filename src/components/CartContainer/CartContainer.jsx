@@ -1,20 +1,10 @@
 import React, { useState,useEffect } from 'react'
 import useGetCart from '../../Services/Cart/useGetSessionData'
 import "./CartContainer.css"
-export default function CartContainer({setTotal}) {
-    const { cartResponse, loading, error, getCart } = useGetCart();
-    console.log(cartResponse)
-    useEffect(() => {
-        getCart();
-        
-    },[])
-    if(error){
-        console.log(error)
-    }
+export default function CartContainer({setTotal,setCart,cart}) {
 
     const calculateTotal = (cartItems) => {
         let total = cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
-        setTotal(total);
     return total
     };
     
@@ -22,15 +12,12 @@ export default function CartContainer({setTotal}) {
     <div className="cart-container">
     <h2>Your Cart</h2>
     <div className="cart-items">
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
-      {!cartResponse ? (
+      {!cart ? (
         <p>Your cart is empty</p>
       ) : (
         <ul>
-          {cartResponse.cart.map((item, index) => (
+          {cart.map((item, index) => (
             <li key={index}>
-                {console.log(item)}
                 {item.product.images && <img src={item.product.images[0].url} alt={item.name} /> }
               <div>
                 <p className="item-name">{item.product.name}</p>
@@ -42,9 +29,8 @@ export default function CartContainer({setTotal}) {
         </ul>
       )}
     </div>
-    {cartResponse &&     <div className="cart-total">
-      <p>Total: $ {calculateTotal(cartResponse.cart)}</p>
-      {/* <button className="checkout-button"><a href='/#/Checkout'>Proceed To Checkout</a></button> */}
+    {cart && <div className="cart-total">
+      <p>Total: $ {calculateTotal(cart)}</p>
     </div>}
   </div>
 );

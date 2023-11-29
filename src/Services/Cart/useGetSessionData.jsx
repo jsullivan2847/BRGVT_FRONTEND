@@ -24,12 +24,12 @@ function useGetCart() {
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {
         const result = await response.json();
-        console.log(result);
-        setCartResponse(result);
+        // console.log(result);
+        setCartResponse(result.cart);
       } else {
         const result = await response.text();
         // console.log("Non-JSON response:", result);
-        setCartResponse(result);
+        setCartResponse(result.cart);
       }
     } catch (error) {
       setError(error);

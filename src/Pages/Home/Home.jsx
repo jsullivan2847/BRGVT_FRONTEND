@@ -7,6 +7,7 @@ import useApiFetch from '../../Services/GetProducts/useApiFetch';
 import { useEffect, useState } from 'react';
 import EditButton from '../../components/Edit Button/EditButton';
 import NewProductModal from '../../components/NewProductModal/NewProductModal';
+import LoginModal from '../../components/LoginModal/LoginModal';
 
 export default function Home() {
 
@@ -14,6 +15,8 @@ export default function Home() {
   const { data, loading, error, fetchData, postData} = useApiFetch();
   const [update,setUpdate] = useState(false);
   const [isNewProductModalActive, setNewProductModalActive] = useState(false);
+  const [loggingIn,setLoggingIn] = useState(false);
+  const loggedIn = false;
 
   const handleNewProductClick = () => {
     setNewProductModalActive(prevState => !prevState)
@@ -23,16 +26,17 @@ export default function Home() {
     fetchData(apiUrl); // Specify your API endpoint
   }, [update]);
 
-  if(loading){
-    console.log('is loading')
-  }
   return (
       <div className="App">
   <div className="main-content">
-    <EditButton  text={"+ Product"} handleButtonClick={handleNewProductClick}/>
+    {!loggedIn && <EditButton text={"Login"} handleButtonClick={() => setLoggingIn(prevState => !prevState) }/>}
+    <LoginModal
+    active={loggingIn}
+    close={() => setLoggingIn(prevState => !prevState)}
+    />
+    {loggedIn && <EditButton  text={"+ Product"} handleButtonClick={handleNewProductClick}/>}
     <NewProductModal
     handleButtonClick={handleNewProductClick} 
-    // product={data}
     active={isNewProductModalActive}
     setUpdate={setUpdate}
     setActive={handleNewProductClick}

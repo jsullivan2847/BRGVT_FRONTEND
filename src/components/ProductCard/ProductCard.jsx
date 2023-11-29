@@ -1,7 +1,6 @@
 import React from 'react'
 import './ProductCard.css' 
 import EditButton from '../Edit Button/EditButton'
-import EditProductModal from '../EditProductModal/EditProductModal'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import DeleteProductModal from '../DeleteProductModal/DeleteProductModal'
@@ -42,7 +41,6 @@ function ProductCard({product,setUpdate}) {
                setActive={setIsActive}
               />
         <Link to={link}><img className="product-image" src={url}/></Link>
-        <button className='add-to-cart-button'>Add to Cart</button>
     </div>
   )
 }

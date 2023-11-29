@@ -34,17 +34,6 @@
   margin: 10px 0;
 }
 
-/* Add to Cart Button */
-.add-to-cart-button {
-  display: block;
-  background-color: #3498db;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
 .add-to-cart-button:hover {
   background-color: #2980b9;
 }
