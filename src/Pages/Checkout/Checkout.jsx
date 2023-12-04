@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import {React,useState,useEffect } from 'react';
 import './Checkout.css';
 import ShippingForm from '../../components/ShippingForm/ShippingForm';
 import ShippingDisplay from '../../components/ShippingDisplay/ShippingDisplay';

@@ -6,7 +6,7 @@ import StripeCheckout from '../StripeCheckout/StripeCheckout';
 
 
 export default function StripeContainer({cart,total}) {
-// Set up your Publishable Key
+console.log(cart);
 const stripe_key = toString(process.env.STRIPE_SECRET_KEY);
 const stripePromise = loadStripe('pk_test_51NxIABCkJuLyyqQLiCkQpbUJv1ZjC47QTp3pLMH4uWzeLAhs4EaKIxwIzsxpyJ34xTJ7kHmWJnU8j9FKJWGLjUyO00MraRadCd');
   return (

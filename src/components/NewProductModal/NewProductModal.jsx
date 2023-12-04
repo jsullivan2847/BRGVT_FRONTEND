@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./NewProductModal.css"
 import EditButton from '../Edit Button/EditButton';
-const NewProductModal = ({postData,active, setActive,handleButtonClick, product, setUpdate}) => {
+const NewProductModal = ({postData,active,error,handleButtonClick,setUpdate}) => {
   const apiUrl = 'https://brgvt-v2.onrender.com/Products';
   const [formData, setFormData] = useState({
     // Define initial form data here
@@ -22,6 +22,7 @@ const NewProductModal = ({postData,active, setActive,handleButtonClick, product,
       await postData(apiUrl,formData);
     }
     finally{
+      console.log(error);
       setUpdate(prevState => !prevState);
       handleButtonClick();
     }

@@ -31,6 +31,7 @@ export default function Home() {
     setUpdate={setUpdate}
     setActive={handleNewProductClick}
     postData={postData}
+    error={error}
     />
     {loading && <h1>Loading...</h1>}
     {data && <ProductList products={data} setUpdate={setUpdate}/>}

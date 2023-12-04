@@ -33,8 +33,6 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => {
-  console.log("from context component: ",useContext(AuthContext))
   let context = useContext(AuthContext)
-  console.log(context.isLoggedIn);
   return context.isLoggedIn;
 };
