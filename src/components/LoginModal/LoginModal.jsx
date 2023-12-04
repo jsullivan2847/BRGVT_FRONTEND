@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import "./LoginModal.css"
 import useLogin from '../../Services/Login/useLogin';
 import EditButton from '../Edit Button/EditButton';
+import { useAuth } from '../../Context/AuthContext';
+import Cookies from 'js-cookie';
 const LoginModal = ({active,close}) => {
-  const apiUrl = 'https://brgvt-v2.onrender.com/login';
+  const apiUrl = 'https://76d2-68-194-52-13.ngrok-free.app/login';
   const [formData, setFormData] = useState({});
   const {login} = useLogin();
   const [token, setToken] = useState(null);
@@ -18,9 +20,10 @@ const LoginModal = ({active,close}) => {
   };
   const handleSubmit = async () => {
     try {
-      let {user_id,token} = await login(formData);
-      setToken(token);
-      console.log(user_id,token);
+      // console.log("isLoggedIn from context: ",isloggedIn);
+      let {data,error} = await login(formData);
+      Cookies.set("LoggedIn","True");
+      console.log("from here: ",Cookies.get())
     } catch(e){console.log(e)}
   }
 

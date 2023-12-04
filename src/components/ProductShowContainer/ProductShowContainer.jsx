@@ -8,6 +8,7 @@ import EditPhotosModal from '../EditPhotosModal/EditPhotosModal.jsx'
 import SelectionContainer from '../SelectionContainer/SelectionContainer.jsx'
 import useAddToCart from '../../Services/Cart/usePostSessionData.jsx'
 import useGetCart from '../../Services/Cart/useGetSessionData.jsx'
+import { useAuth } from '../../Context/AuthContext';
 export default function ProductShowContainer({data,handleButtonClick,isActive,setIsActive,setUpdate}) {
 
     const { cartData, addToCart } = useAddToCart();
@@ -16,6 +17,7 @@ export default function ProductShowContainer({data,handleButtonClick,isActive,se
     const handlePhotoButtonClick = () => {
         setPhotoModalActive(prevState => !prevState)
     }
+    const loggedIn = useAuth();
   useEffect(() => {
     console.log(cartData);
   },[cartData])
@@ -25,12 +27,15 @@ export default function ProductShowContainer({data,handleButtonClick,isActive,se
         <div className='product-show-container'>
             <div className='info-container'>
             <h3 className='product-title'>{data.name}</h3>
-            <EditButton handleButtonClick={handleButtonClick} text={"Edit"}/>
+            {loggedIn &&<>
+              <EditButton handleButtonClick={handleButtonClick} text={"Edit"}/>
             <br/>
             <br/>
             <EditButton handleButtonClick={handlePhotoButtonClick}
             text={"Edit Photos"}
             />
+            </>}
+            
             <EditProductModal active={isActive} 
                   handleButtonClick={handleButtonClick} 
                   product={data}

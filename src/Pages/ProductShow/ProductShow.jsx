@@ -14,7 +14,6 @@ export default function ProductShow() {
   const { data, isLoading, error, fetchData } = useApiFetch();
   const [update,setUpdate] = useState(false);
   const [isActive, setIsActive] = useState(false);
-
   useEffect(() => {
     fetchData(apiUrl);
     console.log('triggered');

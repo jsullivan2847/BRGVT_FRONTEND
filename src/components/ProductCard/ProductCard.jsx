@@ -4,6 +4,7 @@ import EditButton from '../Edit Button/EditButton'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import DeleteProductModal from '../DeleteProductModal/DeleteProductModal'
+import { useAuth } from '../../Context/AuthContext';
 
 function ProductCard({product,setUpdate}) {
   let url = ''
@@ -25,14 +26,7 @@ function ProductCard({product,setUpdate}) {
   return (
     <div className='product-card'>
               <h3 className='product-title'>{product.name}</h3>
-              <EditButton handleButtonClick={handleButtonClick} text={"Edit"}/>
-              <EditButton handleButtonClick={handleButtonClick} text={"Delete"}/>
-              {/* <EditProductModal active={isActive} 
-              handleButtonClick={handleButtonClick} 
-              product={product}
-              setUpdate={setUpdate}
-              setActive={setIsActive}
-              /> */}
+              {useAuth() && <EditButton handleButtonClick={handleButtonClick} text={"Delete"}/>}
               <DeleteProductModal
                active={isActive} 
                handleButtonClick={handleButtonClick} 
