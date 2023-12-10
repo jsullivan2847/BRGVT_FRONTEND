@@ -19,8 +19,11 @@ export default function ProductShowContainer({data,handleButtonClick,isActive,se
     }
     const loggedIn = useAuth();
   useEffect(() => {
-    console.log(cartData);
+    // console.log(cartData);
   },[cartData])
+  useEffect(() => {
+    getCart();
+  },[])
   if(data){
     data = data[0]
       return (
@@ -55,6 +58,8 @@ export default function ProductShowContainer({data,handleButtonClick,isActive,se
             <SelectionContainer
             product={data}
             addToCart={addToCart}
+            cart={cartResponse}
+            getCart={getCart}
             />
         </div>
       )

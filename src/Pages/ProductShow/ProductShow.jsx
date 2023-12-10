@@ -16,7 +16,7 @@ export default function ProductShow() {
   const [isActive, setIsActive] = useState(false);
   useEffect(() => {
     fetchData(apiUrl);
-    console.log('triggered');
+    // console.log('triggered');
   }, [update]);
 
   const handleButtonClick = () => {

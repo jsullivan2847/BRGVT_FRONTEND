@@ -9,7 +9,8 @@ const EditProductModal = ({active, setActive,handleButtonClick, product, setUpda
   const apiUrl = 'https://brgvt-v2.onrender.com/Products/'+product.id;
   const [formData, setFormData] = useState({
     // Define initial form data here
-    name: "",
+    name: product.name,
+    quantity: product.quantity
     // Add other form fields as needed
   });
 
@@ -22,6 +23,7 @@ const EditProductModal = ({active, setActive,handleButtonClick, product, setUpda
     });
   };
   const handleSubmit = async () => {
+    console.log(formData);
     try {
       await putData(apiUrl,"PUT",formData);
     }

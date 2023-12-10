@@ -2,8 +2,8 @@ import React from 'react'
 import { useStripe } from '@stripe/react-stripe-js';
 
 export default function StripeCheckout({products,total}) {
-    console.log(products.length)
-    console.log("here: ",products);
+    // console.log(products.length)
+    // console.log("here: ",products);
     let prepareCheckout = null
     if(products.length > 1){
         prepareCheckout = products.map((product) => {
@@ -28,7 +28,7 @@ export default function StripeCheckout({products,total}) {
         }
     }
     
-    console.log({"items":prepareCheckout})
+    // console.log({"items":prepareCheckout})
     total = total * 100;
     const stripe = useStripe();
     const handleSubmit = async (e) => {

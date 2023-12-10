@@ -3,18 +3,19 @@ import './Checkout.css';
 import ShippingForm from '../../components/ShippingForm/ShippingForm';
 import ShippingDisplay from '../../components/ShippingDisplay/ShippingDisplay';
 import CartContainer from '../../components/CartContainer/CartContainer';
-import StripeContainer from '../../components/StripeComponents/StripeContainer/StripeContainer';
+import StripeCheckout from '../../components/StripeComponents/StripeCheckout/StripeCheckout';
 import useGetCart from '../../Services/Cart/useGetSessionData';
 
-const Checkout = () => {
+const CheckoutContainer = () => {
     const [shipping,setShipping] = useState(null);
     const [payment,setPayment] = useState(null);
     const [cart,setCart] = useState(null);
     const [total,setTotal] = useState(0);
     const { cartResponse, loading, error, getCart } = useGetCart();
+    const [update,setUpdate] = useState(true);
     useEffect(() => {
         getCart();    
-    },[])
+    },[update])
 
   return (
     <div className='checkout-page'>
@@ -26,8 +27,10 @@ const Checkout = () => {
         </div>
         <div className='right-side'>
         {loading && <p>Loading...</p>}
-        {cartResponse && <CartContainer cart={cartResponse} setTotal={setTotal}/>}
-        {cartResponse && <StripeContainer cart={cartResponse} total={total}/>} 
+        {cartResponse && <CartContainer setUpdate={setUpdate}cart={cartResponse} setTotal={setTotal}/>}
+        {/* {cartResponse && <StripeContainer cart={cartResponse} total={total}/>}  */}
+        <h1>stripe..</h1>
+        {cartResponse && <StripeCheckout total={total} products={cartResponse}/>}
         </div>
         
         
@@ -38,4 +41,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default CheckoutContainer;

@@ -26,7 +26,7 @@ function ProductCard({product,setUpdate}) {
   return (
     <div className='product-card'>
               <h3 className='product-title'>{product.name}</h3>
-              {useAuth() && <EditButton handleButtonClick={handleButtonClick} text={"Delete"}/>}
+              {useAuth() && <><EditButton handleButtonClick={handleButtonClick} text={"Delete"}/> <p>Quantity: {product.quantity}</p></> }
               <DeleteProductModal
                active={isActive} 
                handleButtonClick={handleButtonClick} 

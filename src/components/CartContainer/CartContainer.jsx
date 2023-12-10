@@ -1,12 +1,14 @@
 import React, { useState,useEffect } from 'react'
 import useGetCart from '../../Services/Cart/useGetSessionData'
 import "./CartContainer.css"
-export default function CartContainer({setTotal,setCart,cart}) {
+import QuantitySelector from '../QuantitySelector/QuantitySelector';
+export default function CartContainer({setTotal,setCart,cart,setUpdate}) {
 
     const calculateTotal = (cartItems) => {
         let total = cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
     return total
     };
+    console.log(cart);
     
   return (
     <div className="cart-container">
@@ -23,6 +25,7 @@ export default function CartContainer({setTotal,setCart,cart}) {
                 <p className="item-name">{item.product.name}</p>
                 <p className="item-price">${item.product.price}</p>
                 <p className="item-quantity">Quantity: {item.quantity}</p>
+                <QuantitySelector setUpdate={setUpdate} item={item}/>
               </div>
             </li>
           ))}

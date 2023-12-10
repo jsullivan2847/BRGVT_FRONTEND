@@ -1,13 +1,46 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import EditButton from '../Edit Button/EditButton'
-export default function SelectionContainer({product,addToCart,}) {
-    const handleButtonClick = async () => {
-    addToCart(product);
+import "./SelectionContainer.css"
+export default function SelectionContainer({product,addToCart,cart,getCart}) {
+
+  useEffect(() => {
+    getCart();
+  },[])
+  const checkIfAvailable = () => {
+    if(cart){
+      if(cart.length > 0){
+        const item = cart.filter(cartItem => cartItem.product.id == product.id)[0];
+        const item_quantity = item.product.quantity;
+        const cart_quantity = item.quantity;
+        if(cart_quantity >= item_quantity){
+         console.log("not available");
+         return false;
+        }
+        else{
+         return true;
+        }
+     }
+     return true
+    }
+    return false;
+  }
+
+  const handleButtonClick = async () => {
+    getCart();
+    if(checkIfAvailable()){
+      addToCart(product);
+    }
+    else{
+      console.log("failed");
+    }
     }
   return (
     <div className='selection-container'>
-    <h3>${product.price}</h3>
-    <EditButton handleButtonClick={handleButtonClick} text={"Add to Cart"} product={product}/>
+      <div className='selection-container-content'>
+      <h3>${product.price}</h3>
+      {checkIfAvailable() && <EditButton handleButtonClick={handleButtonClick} text={"Add to Cart"} product={product}/>}
+      {!checkIfAvailable() && <h3 className='not-available'>Your cart contains all available items</h3>}
+      </div>
     </div>
   )
 }
