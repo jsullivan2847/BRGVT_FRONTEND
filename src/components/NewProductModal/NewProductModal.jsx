@@ -38,8 +38,8 @@ const NewProductModal = ({postData,active,error,handleButtonClick,setUpdate}) =>
                 <input type="text" id="name" name="name" onChange={handleChange} required/>
                 <label className='label' htmlFor="price">Price:</label>
                 <input type="text" id="price" name="price" onChange={handleChange} required/>
-                <label className='label' htmlFor="sizes">Sizes:</label>
-                <input type="text" id="sizes" name="sizes" onChange={handleChange} required/>
+                {/* <label className='label' htmlFor="sizes">Sizes:</label>
+                <input type="text" id="sizes" name="sizes" onChange={handleChange} required/> */}
                 <label className='label' htmlFor="name">Quantity:</label>
                 <input type="text" id="quantity" name="quantity" onChange={handleChange} required/>
                 <EditButton text={"Submit"} handleButtonClick={handleSubmit}/> 

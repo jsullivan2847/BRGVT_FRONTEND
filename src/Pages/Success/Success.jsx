@@ -15,8 +15,8 @@ export default function Success() {
         console.log(product);
         putData(apiUrl,"PUT",{"quantity":quantity});
       })
+      
     }
-    
   },[cartResponse])
   
   return (

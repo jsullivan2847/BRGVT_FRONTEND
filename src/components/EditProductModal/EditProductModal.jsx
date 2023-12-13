@@ -47,6 +47,8 @@ const EditProductModal = ({active, setActive,handleButtonClick, product, setUpda
                 <input placeholder={product.sizes} type="text" id="sizes" name="sizes" onChange={handleChange} required/>
                 <label htmlFor="quantity" className='label'>Quantity:</label>
                 <input placeholder={product.quantity} type="text" id="quantity" name="quantity" onChange={handleChange} required/>
+                <label htmlFor="description" className='label'>Description:</label>
+                <textarea placeholder={product.description} type="text" id="description" name="description" onChange={handleChange} required/>
                 <EditButton text={"Submit"} handleButtonClick={handleSubmit}/> 
             </div> </div>} </>
   );

@@ -7,24 +7,24 @@ export default function SelectionContainer({product,addToCart,cart,getCart}) {
     getCart();
   },[])
   const checkIfAvailable = () => {
-    if(cart){
-      if(cart.length > 0){
-        const item = cart.filter(cartItem => cartItem.product.id == product.id)[0];
+    if (cart && cart.length > 0) {
+      const item = cart.find((cartItem) => cartItem.product && cartItem.product.id === product.id);
+  
+      if (item) {
         const item_quantity = item.product.quantity;
         const cart_quantity = item.quantity;
-        if(cart_quantity >= item_quantity){
-         console.log("not available");
-         return false;
+  
+        if (cart_quantity >= item_quantity) {
+          console.log("not available");
+          return false;
+        } else {
+          return true;
         }
-        else{
-         return true;
-        }
-     }
-     return true
+      }
     }
-    return false;
-  }
-
+  
+    return true;
+  };
   const handleButtonClick = async () => {
     getCart();
     if(checkIfAvailable()){

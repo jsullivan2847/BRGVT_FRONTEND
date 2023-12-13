@@ -9,6 +9,7 @@ import SelectionContainer from '../SelectionContainer/SelectionContainer.jsx'
 import useAddToCart from '../../Services/Cart/usePostSessionData.jsx'
 import useGetCart from '../../Services/Cart/useGetSessionData.jsx'
 import { useAuth } from '../../Context/AuthContext';
+import ProductMetadata from '../ProductMetadata/ProductMetadata.jsx'
 export default function ProductShowContainer({data,handleButtonClick,isActive,setIsActive,setUpdate}) {
 
     const { cartData, addToCart } = useAddToCart();
@@ -29,7 +30,7 @@ export default function ProductShowContainer({data,handleButtonClick,isActive,se
       return (
         <div className='product-show-container'>
             <div className='info-container'>
-            <h3 className='product-title'>{data.name}</h3>
+            <ProductMetadata data={data}/>
             {loggedIn &&<>
               <EditButton handleButtonClick={handleButtonClick} text={"Edit"}/>
             <br/>

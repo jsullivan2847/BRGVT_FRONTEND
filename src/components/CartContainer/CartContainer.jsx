@@ -20,9 +20,9 @@ export default function CartContainer({setTotal,setCart,cart,setUpdate}) {
         <ul>
           {cart.map((item, index) => (
             <li key={index}>
-                {item.product.images && <img src={item.product.images[0].url} alt={item.name} /> }
+                {item.product.images && <a href={`/#/Product/${item.product.id}`}><img src={item.product.images[0].url} alt={item.name} /></a> }
               <div>
-                <p className="item-name">{item.product.name}</p>
+                <a href={`/#/Product/${item.product.id}`}><p className="item-name">{item.product.name}</p></a>
                 <p className="item-price">${item.product.price}</p>
                 <p className="item-quantity">Quantity: {item.quantity}</p>
                 <QuantitySelector setUpdate={setUpdate} item={item}/>

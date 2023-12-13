@@ -2,8 +2,6 @@ import React from 'react'
 import { useStripe } from '@stripe/react-stripe-js';
 
 export default function StripeCheckout({products,total}) {
-    // console.log(products.length)
-    // console.log("here: ",products);
     let prepareCheckout = null
     if(products.length > 1){
         prepareCheckout = products.map((product) => {
@@ -28,19 +26,19 @@ export default function StripeCheckout({products,total}) {
         }
     }
     
-    // console.log({"items":prepareCheckout})
+    console.log({"items":prepareCheckout})
     total = total * 100;
     const stripe = useStripe();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("http://127.0.0.1:5000/create-checkout-session",{
+        const response = await fetch("https://brgvt-v2.onrender.com/create-checkout-session",{
             method:"POST",
             headers:{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({"items":prepareCheckout})
         })
-
+        console.log('got here');
     const session = await response.json();
     const result = await stripe.redirectToCheckout({
     sessionId: session.id,
